@@ -3,6 +3,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router }  from '@angular/router';
 import { ClientService} from '../../services/client.service';
 import { Client } from '../../models/Client';
+import { SettingsService} from '../../services/settings.service';
 
 
 @Component({
@@ -26,10 +27,14 @@ disableBalanceOnAdd: boolean = true;
   constructor(
       public flashMessagesServices: FlashMessagesService,
       public router:Router,
-      public clientService:ClientService
+      public clientService:ClientService,
+      public settingsService:SettingsService
     ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.disableBalanceOnAdd = this.settingsService.getSettings().disableBalanceOnAdd;
+  }
 
   //funcion onSubmit para mandar los datos a firebase
   onSubmit({value,valid}:{value:Client, valid:boolean}){

@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   	//dependencies
   	private authService:AuthService,
   	private router:Router,
-  	private _flashMessagesService: FlashMessagesService
+  	private flashMessagesService: FlashMessagesService
 
   	) { }
 
@@ -28,12 +28,12 @@ export class LoginComponent implements OnInit {
   onSubmit(){
   	this.authService.login(this.email, this.password)
   		.then((res) => {
-  			this._flashMessagesService.show('You are now logged in', {cssClass: 'alert-success', timeout:3000});
+  			this.flashMessagesService.show('You are now logged in', {cssClass: 'alert-success', timeout:3000});
   			this.router.navigate(['/']);
 
   		})
   		.catch((err) => {
-  			this._flashMessagesService.show(err.message, {cssClass: 'alert-danger', timeout:3000});
+  			this.flashMessagesService.show(err.message, {cssClass: 'alert-danger', timeout:3000});
   			this.router.navigate(['/login']);
   		});
   }
